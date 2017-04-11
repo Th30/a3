@@ -1,0 +1,19 @@
+Q: Does the order of the output matter? and I also add an apostrophe into my trie tree is that fine?
+A: Should be in alphabetical order. Adding an apostrophe is fine.
+Q: Since there's a plethora of trie implementations online, can we just use these models?  I'm not sure 
+   if we have to source it or if we are even allowed to import other peoples code and edit it, so what's 
+   the policy on this?
+A: You should write your own code, which is to be in keeping with the assignment requirements. 
+   Using another's code, even if sourced, is not allowed, and is considered plagiarism. Obviously, I 
+   cannot stop you from looking at online implementations. (It may even help your understanding, 
+   approach, etc.) However, I assume that when you write your code, it is "from scratch" without
+   referring to, or copying parts of, another's work.
+Q: I was wondering if we have to make trie nodes and leafs as separate structs or can I make a single 
+   node which holds a key, array, and a string.
+A: You can do it either way. Your choice.
+Q: Are we required to free the entire trie in the main after we are done with it?
+A: No, it is not a requirement.
+Q: When the user is inputting the text that we are to auto-complete, can we assume that whatever the 
+   input is will result in words being found? Or is it possible for the user to input text that will 
+   result in no auto-complete words being found? 
+A: It IS possible that there is no autocomplete found for the user input.

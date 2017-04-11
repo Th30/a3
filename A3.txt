@@ -1,0 +1,233 @@
+CCPS305 Assignment 3
+
+No extensions will be given.  No late assignments are accepted.
+
+This file may be copied only by a current CCPS305 student, and only to
+her/his personal space for use in this course. It may never be placed in
+any public domain, nor in any place accessible by anyone other than the
+single CCPS305 student who copied it.
+
+Consult Aaddendum.txt for changes to these requirements, as modifications
+and clarifications may be made at any time and are part of this assignment.
+
+Assignment is done in groups of 1, 2 or 3 people.
+There is no marking penalty for working in a group.
+A group member's grade is zero if any group member forgets to
+include this person's name at submit time.
+
+Topics:
+------
+  Trie ADT for Autocomplete
+
+Platform:
+--------
+  The CS moons
+
+Files:
+------
+  complete.c       (you write)
+  trie.c           (you write)
+  trie.h           (you write)
+  A3cert.txt        (copy it. Edit it correctly)
+  A3member.txt      (copy it and edit correctly--will vary by member)
+
+
+
+Submit Files:
+------------
+  Designate ONE PERSON in your group to be the submit-person
+  Note carefully what each person submits:
+
+  A3member.txt  EACH and EVERY group member submits own (including submit person)
+  A3cert.txt    ONLY SUBMIT PERSON submits this
+  complete.c    ONLY SUBMIT PERSON submits this
+  trie.c        ONLY SUBMIT PERSON submits this
+  trie.h        ONLY SUBMIT PERSON submits this
+
+
+
+Summary:
+--------
+Write a program that reads a given dictionary into a Trie in memory, and then
+performs autocomplete on each string read from stdin, by traversing the Trie.
+
+Input:
+-----
+Strings are read, one per line, from stdin. A string will contain only 
+letters of the alphabet in any case ([A-Za-z]).
+
+Output:
+------
+complete writes, on stdout, all of the autocomplete word matches for the each 
+string it reads on stdin. Word matches are displayed in ascending alphabetical 
+order.
+
+Dictionary:
+-----------
+The dictionary is given in the file in this directory named 
+    american-english-no-accents
+Your program should read it from this directory. Thus, there is no need to make 
+a copy of it in your own filespace (unless you wish to for some reason.) 
+
+Note that this dictionary is formatted as follows:
+  -one word per line
+  -each word starts in column 1
+  -words are in alphabetical order
+  -each word contains only letters of the alphabet in any case 
+   ([A-Za-z]), and possibly one apostrophe
+  -no word is longer than 24 characters, including apostrophe
+
+Case of Letters in Word:
+-----------------------
+The default dictionary (american-english-no-accents) contains upper-case
+characters, when they are part of proper names, acronyms, etc. However,
+for regular words, the word is given in lower case. MATCHES ARE CASE
+SENSITIVE.  For example:
+  -Consider string "Daw"
+   "Dawn" appears as an autocomplete match because "Dawn" is a proper name. 
+   "dawn" does not, because matches are case sensitive
+  -Consider string "daw"
+   "dawn" appears as an autocomplete match because "dawn" is a regular word
+   "Dawn" does not because matches are cases sensitive
+
+Your autocomplete program can assume that all the strings entered on stdin 
+are to be matched IN THE CASE GIVEN. 
+
+Testing:
+-------
+WE will test your program with various strings.
+YOU can see if your program is giving correct output by using grep in the
+shell. For example: 
+  -To obtain the correct autocomplete word list for string "Theo", type the 
+   following grep command in the bash shell:
+     grep "^Theo" american-english-no-accents 
+  -To obtain the correct autocomplete word list for string "theo", type the 
+   following grep command in the bash shell:
+     grep "^theo" american-english-no-accents 
+
+Example Runs:
+-------------
+Note that ">" is simply my shell prompt:
+
+>
+>complete 
+Enter String: tune             <--- I typed "tune" on stdin
+ tune
+ tune's
+ tuned
+ tuneful
+ tunefully
+ tuneless
+ tunelessly
+ tuner
+ tuner's
+ tuners
+ tunes
+Enter String: Tune             <--- I typed "Tune" on stdin
+Enter String: eb               <--- I typed "eb" on stdin
+ ebb
+ ebb's
+ ebbed
+ ebbing
+ ebbs
+ ebonies
+ ebony
+ ebony's
+ ebullience
+ ebullience's
+ ebullient
+Enter String: eB               <--- I typed "eB" on stdin
+ eBay
+ eBay's
+Enter String:                  <--- I typed "ctrl-d" on stdin to end program
+>                              
+
+
+Implementation:
+--------------
+Your code must be written in ANSI-C, must compile with gcc on the CS moons, 
+and must run on the CS moons. If you use any options with gcc, you MUST
+state them in comments at the top of your complete.c file.
+
+Your code must implement a Trie ADT in trie.c and trie.h files.
+Your autocomplete program must be implemented in file complete.c; it
+must use #include "trie.h" to obtain your Trie declarations, and 
+it must be compiled with trie.c to obtain your Trie operations.
+
+Your program must determine the autocomplete word list by traversing your 
+Trie dictionary.  Do not use, for example, a system call to grep!
+
+Trie ADT
+--------
+Your program must use your trie ADT to hold the dictionary of words.
+
+Data Structure:
+ Non-leaf Nodes:
+ Each non-leaf node of your trie MUST contain an array that indexes
+ the upper-case and lower-case characters, apostrophe, and special
+ terminal character.
+ You may add extra slots to your array to hold other information.
+ Each node may contain any other fields you need.
+
+ Leaf Nodes:
+ Dictionary words are contained in the leaf nodes.
+
+Operations:
+Implement meaningful operations for your Trie. For example, you might want
+Insert, Search, Traverse. Implement only operations that your main program
+(or your other trie operations) use. Thus, do not implement a Delete 
+operation, for example.
+
+
+Robustness and Assumptions:
+--------------------------
+ -Assume user provides correctly formatted strings on stdin. 
+   -the string is at most 24 characters long.
+   -the string contains only characters in [A-Za-z']
+ -Assume the default dictionary exists and is readable.
+ -Assume memory is always available (malloc calloc, etc)
+ -File Aaddendum.txt will be updated periodically with additional assignment
+  assumptions and QA. Everything in Aaddendum.txt must also be considered
+  part of this assignment, regardless of when it was added.
+
+
+Grading:
+--------
+ On a CS moon only, we will compile your program with gcc and run it.
+
+ -The assignment mark IS ZERO for:
+   -incorrectly named files (includes case!!)
+   -Acert.txt missing or incorrectly filled-in
+   -Amember.txt missing or incorrectly filled-in for any group member
+   -code does not compile
+   -code compiles, but is not a good attempt at solving the problem
+    (too simplistic, does not traverse trie to get words, etc.)
+
+ If not zero, then the mark includes, but is not limited to, the
+ following. Note that if the submission is incomplete, then the
+ Style/Documentation/Modularity mark is also reduced accordingly.
+
+ -Style and Documentation (15%)
+    -simple, clear, readable code
+    -function header comments
+    -internal documentation only of complicated parts
+    -indentation, formatting, use of whitespace (indent with either tabs
+     or spaces, but not both mixed). Your code should look properly
+     formatted when displayed with moon "cat" command.
+    -meaningful, consistent function and variable names
+
+-Modularity  (20%)
+       Good identification and use of Trie operations.
+       Good use of helper functions.  If a task is repeated, use a helper
+       function, NOT (nearly) duplicate code.  If a function is too long,
+       consider dividing it into sub-functions, even if they are called
+       only once. Too long is about 30LOC. Divide even short chunks of
+       code into functions to increase readability of your code.
+
+ -Functionality  (65%)
+    -correctness (when following assignment instructions)
+     Your program may produce required results, but will be worth nothing
+     unless it does so by following assignment instructions/requirements.
+    -correctness is measured ONLY by the grader's own tests.
+                                                                        
+
