@@ -2,7 +2,7 @@
  *
  * CCPS305 - Assignment 3 
  * complete.c
- * By: Theo Dule, Rahul Gupta and Martin Ristov
+ * By: Theo Dule
  *
  */
 #include "trie.h"

@@ -2,7 +2,7 @@
  *
  * CCPS305 - Assignment 3 
  * trie.h
- * By: Theo Dule, Rahul Gupta and Martin Ristov
+ * By: Theo Dule
  *
  */
 #ifndef TRIE_H
@@ -27,7 +27,7 @@ int getCharacterPosition(char);
 void inititializeNode(Node *);
 int insertInTrie(Node *, char *);
 void printTrie(Node *, char *);
-void readFile(Node *, const char[]);
 void printWords(Node *, Node *, int);
+void readFile(Node *, const char[]);
 
 #endif

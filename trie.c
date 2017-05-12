@@ -2,13 +2,37 @@
  *
  * CCPS305 - Assignment 3 
  * trie.c
- * By: Theo Dule, Rahul Gupta and Martin Ristov
+ * By: Theo Dule
  *
  */
 #include "trie.h"
 
 void inititializeNode(Node *node) {
     node->key = (Node **)malloc(sizeof(Node *) * BUFFER_SIZE);
+}
+
+int insertInTrie(Node *rootNode, char *inputWord) {
+    int size = strlen(inputWord); // world length
+    int characterPosition = 0;    // start position at index 0
+
+    // traverse through all the characters in the inputWord
+    for (int i = 0; i < size; i++) {
+        characterPosition = getCharacterPosition(inputWord[i]);
+
+        if (characterPosition >= 0) { // insert on valid inputs only
+            if (rootNode->key[characterPosition] == NULL) {
+                rootNode->key[characterPosition] = (Node *)malloc(sizeof(Node));
+                inititializeNode(rootNode->key[characterPosition]);
+            }
+
+            rootNode = rootNode->key[characterPosition];
+        }
+    }
+
+    rootNode->word = (char *)malloc(sizeof(char) * size);
+    strcpy(rootNode->word, inputWord); // copy inputword into node
+
+    return 0;
 }
 
 int getCharacterPosition(char incomingCharacter) {
@@ -54,30 +78,6 @@ void printTrie(Node *rootNode, char *inputWord) {
     printWords(temp, autoCompleteList, i);
 
     free(autoCompleteList);
-}
-
-int insertInTrie(Node *rootNode, char *inputWord) {
-    int size = strlen(inputWord); // world length
-    int characterPosition = 0;    // start position at index 0
-
-    // traverse through all the characters in the inputWord
-    for (int i = 0; i < size; i++) {
-        characterPosition = getCharacterPosition(inputWord[i]);
-
-        if (characterPosition >= 0) { // insert on valid inputs only
-            if (rootNode->key[characterPosition] == NULL) {
-                rootNode->key[characterPosition] = (Node *)malloc(sizeof(Node));
-                inititializeNode(rootNode->key[characterPosition]);
-            }
-
-            rootNode = rootNode->key[characterPosition];
-        }
-    }
-
-    rootNode->word = (char *)malloc(sizeof(char) * size);
-    strcpy(rootNode->word, inputWord); // copy inputword into node
-
-    return 0;
 }
 
 // Continue Traversal - modulating program
